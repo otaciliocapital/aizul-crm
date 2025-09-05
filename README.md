@@ -4,7 +4,7 @@ Monorepo inicial para usar com o **ChatGPT Codex**.
 
 ## Estrutura
 ```
-/api          -> (placeholder) API PHP/Laravel
+/api          -> API PHP/Laravel
 /wp-plugin    -> Plugin WordPress: Rastreamento de Pedidos Capital (MVP)
 /extension    -> Extensão Chrome (scaffold) com botão "Prioridade"
 /docs         -> Documentação e briefs
@@ -25,3 +25,20 @@ docker compose up -d
 # MySQL: 127.0.0.1:3306 (db: aizulcrm, user: aizul / pass: aizul, root: root)
 # Adminer: http://localhost:8080
 ```
+
+## Desenvolvimento local (API)
+```bash
+cd api
+cp .env.example .env
+composer install
+php artisan key:generate
+php artisan migrate --seed
+php artisan serve
+```
+
+## Deploy em produção (Hostinger)
+1. Fazer upload do conteúdo de `/api` para o servidor Hostinger.
+2. No servidor, executar `composer install --no-dev`.
+3. Copiar `.env.example` para `.env` e ajustar as variáveis de ambiente.
+4. Executar `php artisan key:generate` e `php artisan migrate --seed`.
+5. Configurar o domínio para apontar para o diretório `public/`.
